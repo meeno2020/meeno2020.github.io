@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://meeno2020.github.io</id>
     <title>Meeno Zhang 2020</title>
-    <updated>2020-02-25T18:16:16.323Z</updated>
+    <updated>2020-02-27T16:08:50.904Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://meeno2020.github.io"/>
     <link rel="self" href="https://meeno2020.github.io/atom.xml"/>
@@ -11,12 +11,21 @@
     <icon>https://meeno2020.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Meeno Zhang 2020</rights>
     <entry>
-        <title type="html"><![CDATA[温档测试]]></title>
-        <id>https://meeno2020.github.io/post/wen-dang-ce-shi/</id>
-        <link href="https://meeno2020.github.io/post/wen-dang-ce-shi/">
+        <title type="html"><![CDATA[VS Code and Tools]]></title>
+        <id>https://meeno2020.github.io/post/vs-code-and-tools/</id>
+        <link href="https://meeno2020.github.io/post/vs-code-and-tools/">
         </link>
-        <updated>2020-02-25T18:09:35.000Z</updated>
-        <content type="html"><![CDATA[<p>温档测试温档测试温档测试温档测试温档测试</p>
+        <updated>2020-02-27T15:55:34.000Z</updated>
+        <content type="html"><![CDATA[<p>Visual Studio Code<br>
+Vue.js devtools for Google Chrome<br>
+Node.js</p>
+<p>Extensions for VS Code</p>
+<ul>
+<li>cdnjs</li>
+<li>Live Server</li>
+<li>Prettier - Code formatter</li>
+<li>Vetur</li>
+</ul>
 ]]></content>
     </entry>
 </feed>
