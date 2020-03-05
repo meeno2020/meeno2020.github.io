@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://meeno2020.github.io</id>
     <title>Meeno Zhang 2020</title>
-    <updated>2020-02-27T16:08:50.904Z</updated>
+    <updated>2020-03-05T13:11:27.176Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://meeno2020.github.io"/>
     <link rel="self" href="https://meeno2020.github.io/atom.xml"/>
@@ -10,6 +10,44 @@
     <logo>https://meeno2020.github.io/images/avatar.png</logo>
     <icon>https://meeno2020.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Meeno Zhang 2020</rights>
+    <entry>
+        <title type="html"><![CDATA[数据库连接及增加记录]]></title>
+        <id>https://meeno2020.github.io/post/shu-ju-ku-lian-jie-ji-zeng-jia-ji-lu/</id>
+        <link href="https://meeno2020.github.io/post/shu-ju-ku-lian-jie-ji-zeng-jia-ji-lu/">
+        </link>
+        <updated>2020-03-05T13:04:58.000Z</updated>
+        <content type="html"><![CDATA[<p>1.在app.js中连接数据库<br>
+在app.js中增加初始化命令，并放置在onLaunch: function(){ ********* }中间。<br>
+wx.cloud.init({<br>
+env: '数据库的名字',<br>
+traceUser: true,<br>
+})</p>
+<p>2.在页面的.js中连接数据库表<br>
+用这个语句<br>
+const DB = wx.cloud.database().collection(&quot;*******&quot;)<br>
+在所需要的页面中连接数据库表<br>
+放置在Page({   })的外面</p>
+<p>3.编写函数<br>
+放置在Page({   })的内部<br>
+Page({<br>
+addData(){<br>
+DB.add({<br>
+data:{<br>
+phone: &quot;12345678901&quot;,<br>
+name: &quot;worker1&quot;,<br>
+carNumber: &quot;BA0143&quot;<br>
+},<br>
+success(res){<br>
+console.log(&quot;添加成功&quot;,res)<br>
+},<br>
+fail(res) {<br>
+console.log(&quot;添加失败&quot;, res)<br>
+}<br>
+})<br>
+}<br>
+})</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[VS Code and Tools]]></title>
         <id>https://meeno2020.github.io/post/vs-code-and-tools/</id>
