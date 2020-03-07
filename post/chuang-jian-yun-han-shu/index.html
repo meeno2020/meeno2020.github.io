@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>数据库连接及数据库页面绑定 | Meeno Zhang 2020</title>
+<title>创建云函数 | Meeno Zhang 2020</title>
 <meta name="description" content="Better than 2019">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -80,51 +80,74 @@
       <div class="content-container">
         <div class="post-detail">
           
-          <h2 class="post-title">数据库连接及数据库页面绑定</h2>
+          <h2 class="post-title">创建云函数</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2020-03-05</span>
+            <span><i class="icon-calendar-outline"></i> 2020-03-06</span>
             
           </div>
           <div class="post-content">
-            <p>1.在app.js中连接数据库<br>
-在app.js中增加初始化命令，并放置在onLaunch: function(){ ********* }中间。<br>
-wx.cloud.init({<br>
-env: '数据库的名字',<br>
-traceUser: true,<br>
-})</p>
-<p>2.在页面的.js中连接数据库表<br>
-用这个语句<br>
-const DB = wx.cloud.database().collection(&quot;*******&quot;)<br>
-在所需要的页面中连接数据库表<br>
-放置在Page({   })的外面</p>
-<p>3.编写函数<br>
-放置在Page({   })的内部<br>
-Page({<br>
-addData(){<br>
-DB.add({<br>
-data:{<br>
-phone: &quot;12345678901&quot;,<br>
-name: &quot;worker1&quot;,<br>
-carNumber: &quot;BA0143&quot;<br>
+            <ol>
+<li>
+<p>project.config.json<br>
+&quot;cloudfunctionRoot&quot;:&quot;/cloud&quot;,<br>
+文件夹名字假设为cloud</p>
+</li>
+<li>
+<p>app.js<br>
+和是用数据库一样需要，需要在这个文件里面，初始化云开发环境</p>
+</li>
+<li>
+<p>在开发者工具中，创建云函数目录<br>
+在函数文件中index.js里<br>
+// 云函数入口文件<br>
+const cloud = require('wx-server-sdk')<br>
+cloud.init()<br>
+依赖引入是必须的<br>
+然后是环境初始化</p>
+</li>
+<li>
+<p>云函数入口<br>
+exports.main = async (event, context) =&gt; {</p>
+</li>
+</ol>
+<p>}</p>
+<ol start="5">
+<li>
+<p>云函数调用方法<br>
+<button bindtap="qiuhe"> 云函数调用</button></p>
+</li>
+<li>
+<p>js 中的设置<br>
+在page中添加</p>
+</li>
+</ol>
+<p>qiuhe(){<br>
+wx.cloud.callFunction({<br>
+name:&quot;meeno&quot;,<br>
+data{<br>
+aa:1,<br>
+b:3    //传参数名字 可以 不一样么？<br>
 },<br>
 success(res){<br>
-console.log(&quot;添加成功&quot;,res)<br>
+console.log(&quot;success&quot;,res)<br>
 },<br>
-fail(res) {<br>
-console.log(&quot;添加失败&quot;, res)<br>
+fail(res){<br>
+console.log(&quot;fail&quot;,res)<br>
 }<br>
 })<br>
-}<br>
-})</p>
+}</p>
+<ol start="7">
+<li></li>
+</ol>
 
           </div>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://meeno2020.github.io/post/vs-code-and-tools/">
+            <a class="purple-link" href="https://meeno2020.github.io/post/zeng-jia-ji-cha-xun-ji-lu/">
               <h3 class="post-title">
-                下一篇：VS Code and Tools
+                下一篇：增加，查询，删除，更改，数据
               </h3>
             </a>
           </div>

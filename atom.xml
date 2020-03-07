@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://meeno2020.github.io</id>
     <title>Meeno Zhang 2020</title>
-    <updated>2020-03-05T13:11:27.176Z</updated>
+    <updated>2020-03-07T10:58:36.702Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://meeno2020.github.io"/>
     <link rel="self" href="https://meeno2020.github.io/atom.xml"/>
@@ -11,7 +11,177 @@
     <icon>https://meeno2020.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Meeno Zhang 2020</rights>
     <entry>
-        <title type="html"><![CDATA[数据库连接及增加记录]]></title>
+        <title type="html"><![CDATA[创建云函数]]></title>
+        <id>https://meeno2020.github.io/post/chuang-jian-yun-han-shu/</id>
+        <link href="https://meeno2020.github.io/post/chuang-jian-yun-han-shu/">
+        </link>
+        <updated>2020-03-06T02:33:56.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>
+<p>project.config.json<br>
+&quot;cloudfunctionRoot&quot;:&quot;/cloud&quot;,<br>
+文件夹名字假设为cloud</p>
+</li>
+<li>
+<p>app.js<br>
+和是用数据库一样需要，需要在这个文件里面，初始化云开发环境</p>
+</li>
+<li>
+<p>在开发者工具中，创建云函数目录<br>
+在函数文件中index.js里<br>
+// 云函数入口文件<br>
+const cloud = require('wx-server-sdk')<br>
+cloud.init()<br>
+依赖引入是必须的<br>
+然后是环境初始化</p>
+</li>
+<li>
+<p>云函数入口<br>
+exports.main = async (event, context) =&gt; {</p>
+</li>
+</ol>
+<p>}</p>
+<ol start="5">
+<li>
+<p>云函数调用方法<br>
+<button bindtap="qiuhe"> 云函数调用</button></p>
+</li>
+<li>
+<p>js 中的设置<br>
+在page中添加</p>
+</li>
+</ol>
+<p>qiuhe(){<br>
+wx.cloud.callFunction({<br>
+name:&quot;meeno&quot;,<br>
+data{<br>
+aa:1,<br>
+b:3    //传参数名字 可以 不一样么？<br>
+},<br>
+success(res){<br>
+console.log(&quot;success&quot;,res)<br>
+},<br>
+fail(res){<br>
+console.log(&quot;fail&quot;,res)<br>
+}<br>
+})<br>
+}</p>
+<ol start="7">
+<li></li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[增加，查询，删除，更改，数据]]></title>
+        <id>https://meeno2020.github.io/post/zeng-jia-ji-cha-xun-ji-lu/</id>
+        <link href="https://meeno2020.github.io/post/zeng-jia-ji-cha-xun-ji-lu/">
+        </link>
+        <updated>2020-03-05T15:25:37.000Z</updated>
+        <content type="html"><![CDATA[<p>1.wxml中的设置</p>
+<p><input placeholder="Name" bindinput="addName" type=""></input></p>
+<p><input placeholder="Phone" bindinput="addPhone"></input></p>
+<p><input placeholder="CarNumber" bindinput="addCar"></input></p>
+<!--bindinput 对应事件--->
+<!---bindtap 对应方法-->
+<!----->
+<p><button bindtap="addData" type="primary"> add data</button></p>
+<p><button bindtap="searchData" type="primary">  search data</button></p>
+<p><input placeholder="ID" bindinput="dataID"></input><br>
+<button bindtap="delData" type="primary">  del data</button></p>
+<!----->
+<p><input placeholder="ID of recoder to change " bindinput="upDataID"></input><br>
+<input placeholder="newPhone" bindinput="upPhone"></input><br>
+<button bindtap="upData" type="primary">  up data</button></p>
+<!----->
+<p>2.js中的设置</p>
+<p>const DB = wx.cloud.database().collection(&quot;list&quot;)<br>
+//定义变量<br>
+let Name= &quot;&quot;<br>
+let Phone= &quot;&quot;<br>
+let CarNumber= &quot;&quot;<br>
+let DataID= &quot;&quot;<br>
+let UpDataID= &quot;&quot;<br>
+let UpPhone= &quot;&quot;</p>
+<p>Page({</p>
+<p>//定义事件</p>
+<p>addName(event) {<br>
+console.log(event.detail.value),<br>
+Name = event.detail.value<br>
+},<br>
+addPhone(event) {<br>
+console.log(event.detail.value),<br>
+Phone = event.detail.value<br>
+},<br>
+addCar(event) {<br>
+console.log(event.detail.value),<br>
+CarNumber = event.detail.value<br>
+},<br>
+dataID(event) {<br>
+console.log(event.detail.value),<br>
+DataID = event.detail.value<br>
+},<br>
+upPhone(event) {<br>
+console.log(event.detail.value),<br>
+UpPhone = event.detail.value<br>
+},<br>
+upDataID(event) {<br>
+console.log(event.detail.value),<br>
+UpDataID = event.detail.value<br>
+},</p>
+<p>//定义方法</p>
+<p>addData(){<br>
+DB.add({<br>
+data:{<br>
+phone : Phone ,      //用： 不用 =， 这里是给 字段 定义取 哪一个变量，而不是赋值。<br>
+name : Name ,<br>
+carNumber : CarNumber<br>
+},<br>
+success(res){<br>
+console.log(&quot;添加成功&quot;,res)<br>
+},<br>
+fail(res) {<br>
+console.log(&quot;添加失败&quot;, res)<br>
+}<br>
+})<br>
+},<br>
+searchData(){<br>
+DB.get({<br>
+success(res){<br>
+console.log(&quot;查询成功&quot;, res)<br>
+},<br>
+fail(res) {<br>
+console.log(&quot;查询失败&quot;, res)<br>
+}<br>
+})<br>
+},<br>
+delData(){<br>
+DB.doc(DataID).remove({<br>
+success(res) {<br>
+console.log(&quot;删除成功&quot;, res)<br>
+},<br>
+fail(res) {<br>
+console.log(&quot;删除失败&quot;, res)<br>
+}<br>
+})<br>
+},<br>
+upData(){<br>
+DB.doc(UpDataID).update({<br>
+data: {<br>
+phone : UpPhone<br>
+},<br>
+success(res) {<br>
+console.log(&quot;删除成功&quot;, res)<br>
+},<br>
+fail(res) {<br>
+console.log(&quot;删除失败&quot;, res)<br>
+}<br>
+})<br>
+}<br>
+})</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[数据库连接及数据库页面绑定]]></title>
         <id>https://meeno2020.github.io/post/shu-ju-ku-lian-jie-ji-zeng-jia-ji-lu/</id>
         <link href="https://meeno2020.github.io/post/shu-ju-ku-lian-jie-ji-zeng-jia-ji-lu/">
         </link>

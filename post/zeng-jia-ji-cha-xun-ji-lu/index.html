@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>数据库连接及数据库页面绑定 | Meeno Zhang 2020</title>
+<title>增加，查询，删除，更改，数据 | Meeno Zhang 2020</title>
 <meta name="description" content="Better than 2019">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -80,38 +80,109 @@
       <div class="content-container">
         <div class="post-detail">
           
-          <h2 class="post-title">数据库连接及数据库页面绑定</h2>
+          <h2 class="post-title">增加，查询，删除，更改，数据</h2>
           <div class="post-info post-detail-info">
             <span><i class="icon-calendar-outline"></i> 2020-03-05</span>
             
           </div>
           <div class="post-content">
-            <p>1.在app.js中连接数据库<br>
-在app.js中增加初始化命令，并放置在onLaunch: function(){ ********* }中间。<br>
-wx.cloud.init({<br>
-env: '数据库的名字',<br>
-traceUser: true,<br>
-})</p>
-<p>2.在页面的.js中连接数据库表<br>
-用这个语句<br>
-const DB = wx.cloud.database().collection(&quot;*******&quot;)<br>
-在所需要的页面中连接数据库表<br>
-放置在Page({   })的外面</p>
-<p>3.编写函数<br>
-放置在Page({   })的内部<br>
-Page({<br>
-addData(){<br>
+            <p>1.wxml中的设置</p>
+<p><input placeholder="Name" bindinput="addName" type=""></input></p>
+<p><input placeholder="Phone" bindinput="addPhone"></input></p>
+<p><input placeholder="CarNumber" bindinput="addCar"></input></p>
+<!--bindinput 对应事件--->
+<!---bindtap 对应方法-->
+<!----->
+<p><button bindtap="addData" type="primary"> add data</button></p>
+<p><button bindtap="searchData" type="primary">  search data</button></p>
+<p><input placeholder="ID" bindinput="dataID"></input><br>
+<button bindtap="delData" type="primary">  del data</button></p>
+<!----->
+<p><input placeholder="ID of recoder to change " bindinput="upDataID"></input><br>
+<input placeholder="newPhone" bindinput="upPhone"></input><br>
+<button bindtap="upData" type="primary">  up data</button></p>
+<!----->
+<p>2.js中的设置</p>
+<p>const DB = wx.cloud.database().collection(&quot;list&quot;)<br>
+//定义变量<br>
+let Name= &quot;&quot;<br>
+let Phone= &quot;&quot;<br>
+let CarNumber= &quot;&quot;<br>
+let DataID= &quot;&quot;<br>
+let UpDataID= &quot;&quot;<br>
+let UpPhone= &quot;&quot;</p>
+<p>Page({</p>
+<p>//定义事件</p>
+<p>addName(event) {<br>
+console.log(event.detail.value),<br>
+Name = event.detail.value<br>
+},<br>
+addPhone(event) {<br>
+console.log(event.detail.value),<br>
+Phone = event.detail.value<br>
+},<br>
+addCar(event) {<br>
+console.log(event.detail.value),<br>
+CarNumber = event.detail.value<br>
+},<br>
+dataID(event) {<br>
+console.log(event.detail.value),<br>
+DataID = event.detail.value<br>
+},<br>
+upPhone(event) {<br>
+console.log(event.detail.value),<br>
+UpPhone = event.detail.value<br>
+},<br>
+upDataID(event) {<br>
+console.log(event.detail.value),<br>
+UpDataID = event.detail.value<br>
+},</p>
+<p>//定义方法</p>
+<p>addData(){<br>
 DB.add({<br>
 data:{<br>
-phone: &quot;12345678901&quot;,<br>
-name: &quot;worker1&quot;,<br>
-carNumber: &quot;BA0143&quot;<br>
+phone : Phone ,      //用： 不用 =， 这里是给 字段 定义取 哪一个变量，而不是赋值。<br>
+name : Name ,<br>
+carNumber : CarNumber<br>
 },<br>
 success(res){<br>
 console.log(&quot;添加成功&quot;,res)<br>
 },<br>
 fail(res) {<br>
 console.log(&quot;添加失败&quot;, res)<br>
+}<br>
+})<br>
+},<br>
+searchData(){<br>
+DB.get({<br>
+success(res){<br>
+console.log(&quot;查询成功&quot;, res)<br>
+},<br>
+fail(res) {<br>
+console.log(&quot;查询失败&quot;, res)<br>
+}<br>
+})<br>
+},<br>
+delData(){<br>
+DB.doc(DataID).remove({<br>
+success(res) {<br>
+console.log(&quot;删除成功&quot;, res)<br>
+},<br>
+fail(res) {<br>
+console.log(&quot;删除失败&quot;, res)<br>
+}<br>
+})<br>
+},<br>
+upData(){<br>
+DB.doc(UpDataID).update({<br>
+data: {<br>
+phone : UpPhone<br>
+},<br>
+success(res) {<br>
+console.log(&quot;删除成功&quot;, res)<br>
+},<br>
+fail(res) {<br>
+console.log(&quot;删除失败&quot;, res)<br>
 }<br>
 })<br>
 }<br>
@@ -122,9 +193,9 @@ console.log(&quot;添加失败&quot;, res)<br>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://meeno2020.github.io/post/vs-code-and-tools/">
+            <a class="purple-link" href="https://meeno2020.github.io/post/shu-ju-ku-lian-jie-ji-zeng-jia-ji-lu/">
               <h3 class="post-title">
-                下一篇：VS Code and Tools
+                下一篇：数据库连接及数据库页面绑定
               </h3>
             </a>
           </div>
